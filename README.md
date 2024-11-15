@@ -1,2 +1,2 @@
-# codingbones
+# Coding Bones
 Code planner.
