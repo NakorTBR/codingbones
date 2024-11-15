@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import shutil
-from file_object import FileObject
+from src.file_object import FileObject
 
 __public_path = Path().cwd() / "public/"
 def get_public_path():

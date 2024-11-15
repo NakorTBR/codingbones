@@ -1,6 +1,6 @@
 import unittest
 
-from nodehandlers import (
+from src.nodehandlers import (
     markdown_to_blocks,
     markdown_to_html_node,
     block_to_block_type,
@@ -13,9 +13,9 @@ from nodehandlers import (
     block_type_ulist,
 )
 
-from io_handler import get_content_path, get_static_path, get_public_path, get_template_path
+from src.io_handler import get_content_path, get_static_path, get_public_path, get_template_path
 
-from generator import generate_page, generate_pages_recursive
+from src.generator import generate_page, generate_pages_recursive
 
 # from io_handler import get_file_contents
 

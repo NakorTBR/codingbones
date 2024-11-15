@@ -1,9 +1,9 @@
-from textnode import TextType, TextNode
+from src.textnode import TextType, TextNode
 import re
-from htmlnode import LeafNode, ParentNode
-from print_colours import debug_colours as dc
+from src.htmlnode import LeafNode, ParentNode
+from src.print_colours import debug_colours as dc
 
-from io_handler import get_file_contents
+from src.io_handler import get_file_contents
 
 
 block_type_paragraph = "paragraph"

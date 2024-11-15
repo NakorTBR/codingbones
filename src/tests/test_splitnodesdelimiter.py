@@ -1,13 +1,13 @@
 import unittest
-from nodehandlers import (
+from src.nodehandlers import (
     split_nodes_delimiter, 
     split_nodes_image, 
     split_nodes_link, 
     text_to_textnodes,
     )
 
-from textnode import TextNode, TextType
-from print_colours import debug_colours as dc
+from src.textnode import TextNode, TextType
+from src.print_colours import debug_colours as dc
 
 
 class TestSplitNodesDelimiter(unittest.TestCase):

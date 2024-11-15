@@ -1,6 +1,6 @@
-from io_handler import check_read_directories, clean_public_directory, push_public
-from io_handler import get_content_path, get_static_path, get_public_path, get_template_path
-from generator import generate_page, generate_pages_recursive
+from src.io_handler import check_read_directories, clean_public_directory, push_public
+from src.io_handler import get_content_path, get_static_path, get_public_path, get_template_path
+from src.generator import generate_page, generate_pages_recursive
 
 def main():
     if not check_read_directories():

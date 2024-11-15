@@ -1,6 +1,6 @@
-from io_handler import get_file_contents, read_all_content_files, get_template_path
+from src.io_handler import get_file_contents, read_all_content_files, get_template_path
 from pathlib import Path
-from nodehandlers import markdown_to_html_node, extract_title, strip_title
+from src.nodehandlers import markdown_to_html_node, extract_title, strip_title
 
 def generate_page(from_path:Path, template_path:Path, dest_path:Path):
     print(f"\nGenerating page from \n{from_path} \nto \n{dest_path} \nusing \n{template_path}")
