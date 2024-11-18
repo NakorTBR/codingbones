@@ -1,6 +1,7 @@
 from pyramid.config import Configurator
 
-
+# DB error:  Not properly configured.  (does not exist).
+# TODO: Redo DB setup with better instructions.
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
