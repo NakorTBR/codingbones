@@ -4,6 +4,7 @@ from pyramid.config import Configurator
 # TODO: Redo DB setup with better instructions.
 # Bit of an emergency, doing a push because I can't remember what I've changed.
 # I think most of it is outside the repo, but here we are.
+# Taking the day off.  Haven't taken a day off in 47 days.
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
