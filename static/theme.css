@@ -3,7 +3,9 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   color: #ffffff;
-  background: #bc2131;
+  background: rgb(37,6,1);
+  background: linear-gradient(169deg, rgba(37,6,1,1) 44%, rgba(0,0,0,1) 83%);
+  background-attachment: fixed;
 }
 h1,
 h2,
