@@ -1,0 +1,187 @@
+# Japanese translations for colander.
+# Copyright (C) 2012 ORGANIZATION
+# This file is distributed under the same license as the colander project.
+# OCHIAI, Gouji <gjo.ext@gmail.com>, 2012-2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: colander 0.8\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-01-02 19:48-0600\n"
+"PO-Revision-Date: 2013-11-16 14:30+0900\n"
+"Last-Translator: OCHIAI, Gouji <gjo.ext@gmail.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: src/colander/__init__.py:319
+msgid "Invalid value"
+msgstr "無効な値です"
+
+#: src/colander/__init__.py:375
+msgid "String does not match expected pattern"
+msgstr "文字列がパターンに一致しません"
+
+#: src/colander/__init__.py:405
+msgid "Invalid email address"
+msgstr "無効なメールアドレスです"
+
+#: src/colander/__init__.py:434
+msgid "Not a data URL"
+msgstr ""
+
+# | msgid "Invalid time"
+#: src/colander/__init__.py:435
+#, fuzzy
+msgid "Invalid MIME type"
+msgstr "無効な時刻です"
+
+#: src/colander/__init__.py:436
+msgid "Invalid Base64 encoded data"
+msgstr ""
+
+#: src/colander/__init__.py:494
+msgid "${val} is less than minimum value ${min}"
+msgstr "${val} は最小値 ${min} を下回っています"
+
+#: src/colander/__init__.py:495
+msgid "${val} is greater than maximum value ${max}"
+msgstr "${val} は最大値 ${max} を超過しています"
+
+#: src/colander/__init__.py:545
+msgid "Shorter than minimum length ${min}"
+msgstr "${min} 以上の長さが必要です"
+
+#: src/colander/__init__.py:546
+msgid "Longer than maximum length ${max}"
+msgstr "${max} より短くしてください"
+
+#: src/colander/__init__.py:569
+msgid "\"${val}\" is not one of ${choices}"
+msgstr "\"${val}\" は ${choices} のいずれかでなければなりません"
+
+# | msgid "\"${val}\" is not one of ${choices}"
+#: src/colander/__init__.py:593
+#, fuzzy
+msgid "\"${val}\" must not be one of ${choices}"
+msgstr "\"${val}\" は ${choices} のいずれかでなければなりません"
+
+#: src/colander/__init__.py:616
+msgid "One or more of the choices you made was not acceptable"
+msgstr "選択された値のいくつかが許容される値ではありません"
+
+#: src/colander/__init__.py:639 src/colander/__init__.py:648
+msgid "\"${val}\" is not a valid credit card number"
+msgstr "\"${val}\" は妥当なクレジットカード番号ではありません"
+
+#: src/colander/__init__.py:720
+msgid "Must be a URL"
+msgstr "URLでなければなりません"
+
+#: src/colander/__init__.py:731
+msgid "Must be a file:// URI scheme"
+msgstr ""
+
+#: src/colander/__init__.py:737
+msgid "Invalid UUID string"
+msgstr ""
+
+#: src/colander/__init__.py:839
+msgid "\"${val}\" is not a mapping type: ${err}"
+msgstr "\"${val}\" はマップ型でなければなりません: ${err}"
+
+#: src/colander/__init__.py:889
+msgid "Unrecognized keys in mapping: \"${val}\""
+msgstr "未定義のキーがマップに含まれています: \"${val}\""
+
+#: src/colander/__init__.py:990 src/colander/__init__.py:1230
+msgid "\"${val}\" is not iterable"
+msgstr "\"${val}\" は iterable でなければなりません"
+
+#: src/colander/__init__.py:998
+msgid ""
+"\"${val}\" has an incorrect number of elements (expected ${exp}, was "
+"${was})"
+msgstr "\"${val}\" の要素数が正しくありません (${exp} 個のはずが ${was} 個)"
+
+#: src/colander/__init__.py:1141 src/colander/__init__.py:1172
+msgid "${cstruct} is not iterable"
+msgstr "${cstruct} は iterable でなければなりません"
+
+#: src/colander/__init__.py:1462
+msgid "${val} cannot be serialized: ${err}"
+msgstr "${val} が直列化できません: ${err}"
+
+#: src/colander/__init__.py:1484
+msgid "${val} is not a string: ${err}"
+msgstr "${val} は文字列ではありません: ${err}"
+
+#: src/colander/__init__.py:1507 src/colander/__init__.py:1518
+msgid "\"${val}\" is not a number"
+msgstr "\"${val}\" は数値ではありません"
+
+#: src/colander/__init__.py:1697
+msgid "${val} is not a string"
+msgstr "${val} は文字列ではありません"
+
+#: src/colander/__init__.py:1709
+msgid "\"${val}\" is neither in (${false_choices}) nor in (${true_choices})"
+msgstr "\"${val}\" が (${false_choices}) にも (${true_choices}) にも該当しません"
+
+#: src/colander/__init__.py:1775 src/colander/__init__.py:1794
+#: src/colander/__init__.py:1806
+msgid "relative name \"${val}\" irresolveable without package"
+msgstr "相対名 \"${val}\" はパッケージを指定しなければ名前解決できません"
+
+#: src/colander/__init__.py:1843
+msgid "\"${val}\" has no __name__"
+msgstr "\"${val}\" には __name__ が含まれていません"
+
+#: src/colander/__init__.py:1852
+msgid "\"${val}\" is not a string"
+msgstr "\"${val}\" は文字列ではありません"
+
+#: src/colander/__init__.py:1862
+msgid "The dotted name \"${name}\" cannot be imported"
+msgstr "ドット区切り名  \"${name}\" がインポートできませんでした"
+
+#: src/colander/__init__.py:1915 src/colander/__init__.py:2005
+msgid "Invalid date"
+msgstr "無効な日付です"
+
+#: src/colander/__init__.py:1932
+msgid "\"${val}\" is not a datetime object"
+msgstr "\"${val}\" は datetime オブジェクトではありません"
+
+#: src/colander/__init__.py:2020
+msgid "\"${val}\" is not a date object"
+msgstr "\"${val}\" は date オブジェクトではありません"
+
+#: src/colander/__init__.py:2085
+msgid "Invalid time"
+msgstr "無効な時刻です"
+
+#: src/colander/__init__.py:2096
+msgid "\"${val}\" is not a time object"
+msgstr "\"${val}\" は time オブジェクトではありません"
+
+# | msgid "\"${val}\" is not one of ${choices}"
+#: src/colander/__init__.py:2161 src/colander/__init__.py:2177
+#, fuzzy
+msgid "\"${val}\" is not a valid \"${cls}\""
+msgstr "\"${val}\" は ${choices} のいずれかでなければなりません"
+
+#: src/colander/__init__.py:2297
+msgid "Required"
+msgstr "必須です"
+
+#~ msgid "fail ${val}"
+#~ msgstr "失敗 ${val}"
+
+#~ msgid "${val}: ${choices}"
+#~ msgstr "${val}: ${choices}"
+

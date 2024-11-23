@@ -1,0 +1,186 @@
+# Simplified Chinese translations for colander.
+# This file is distributed under the same license as the colander project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: colander 0.8\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-01-02 19:48-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_Hans\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: src/colander/__init__.py:319
+msgid "Invalid value"
+msgstr "无效值"
+
+#: src/colander/__init__.py:375
+msgid "String does not match expected pattern"
+msgstr "字符串和要求的模式不匹配"
+
+#: src/colander/__init__.py:405
+msgid "Invalid email address"
+msgstr "无效的邮件地址"
+
+#: src/colander/__init__.py:434
+msgid "Not a data URL"
+msgstr ""
+
+# | msgid "Invalid date"
+#: src/colander/__init__.py:435
+#, fuzzy
+#| msgid "Invalid time"
+msgid "Invalid MIME type"
+msgstr "无效日期"
+
+#: src/colander/__init__.py:436
+msgid "Invalid Base64 encoded data"
+msgstr ""
+
+#: src/colander/__init__.py:494
+msgid "${val} is less than minimum value ${min}"
+msgstr "${val} 低于最低限值 ${min}"
+
+#: src/colander/__init__.py:495
+msgid "${val} is greater than maximum value ${max}"
+msgstr "${val} 大于最高限值 ${max}"
+
+#: src/colander/__init__.py:545
+msgid "Shorter than minimum length ${min}"
+msgstr "短于最小长度 ${min}"
+
+#: src/colander/__init__.py:546
+msgid "Longer than maximum length ${max}"
+msgstr "长于最大长度 ${max}"
+
+#: src/colander/__init__.py:569
+msgid "\"${val}\" is not one of ${choices}"
+msgstr "\"${val}\" 不是这些值 ${choices} 中的一个"
+
+#: src/colander/__init__.py:593
+#, fuzzy
+#| msgid "\"${val}\" is not one of ${choices}"
+msgid "\"${val}\" must not be one of ${choices}"
+msgstr "\"${val}\" 不是这些值 ${choices} 中的一个"
+
+#: src/colander/__init__.py:616
+msgid "One or more of the choices you made was not acceptable"
+msgstr ""
+
+#: src/colander/__init__.py:639 src/colander/__init__.py:648
+#, fuzzy
+#| msgid "\"${val}\" is not a number"
+msgid "\"${val}\" is not a valid credit card number"
+msgstr "\"${val}\" 不是数字"
+
+#: src/colander/__init__.py:720
+msgid "Must be a URL"
+msgstr ""
+
+#: src/colander/__init__.py:731
+msgid "Must be a file:// URI scheme"
+msgstr ""
+
+#: src/colander/__init__.py:737
+msgid "Invalid UUID string"
+msgstr ""
+
+#: src/colander/__init__.py:839
+msgid "\"${val}\" is not a mapping type: ${err}"
+msgstr "\"${val}\" 不是一个映射类型: ${err}"
+
+#: src/colander/__init__.py:889
+msgid "Unrecognized keys in mapping: \"${val}\""
+msgstr "无法识别的键: \"${val}\""
+
+#: src/colander/__init__.py:990 src/colander/__init__.py:1230
+msgid "\"${val}\" is not iterable"
+msgstr "\"${val}\" 不可遍历"
+
+#: src/colander/__init__.py:998
+msgid ""
+"\"${val}\" has an incorrect number of elements (expected ${exp}, was "
+"${was})"
+msgstr "\"${val}\" 的元素个数不正确 (要求 ${exp}, 实际 ${was})"
+
+#: src/colander/__init__.py:1141 src/colander/__init__.py:1172
+msgid "${cstruct} is not iterable"
+msgstr "${cstruct} 不可遍历"
+
+#: src/colander/__init__.py:1462
+msgid "${val} cannot be serialized: ${err}"
+msgstr "${val} 不可序列化: ${err}"
+
+#: src/colander/__init__.py:1484
+msgid "${val} is not a string: ${err}"
+msgstr "${val} 不是字符串: ${err}"
+
+#: src/colander/__init__.py:1507 src/colander/__init__.py:1518
+msgid "\"${val}\" is not a number"
+msgstr "\"${val}\" 不是数字"
+
+#: src/colander/__init__.py:1697
+msgid "${val} is not a string"
+msgstr "${val} 不是字符串"
+
+#: src/colander/__init__.py:1709
+msgid "\"${val}\" is neither in (${false_choices}) nor in (${true_choices})"
+msgstr ""
+
+#: src/colander/__init__.py:1775 src/colander/__init__.py:1794
+#: src/colander/__init__.py:1806
+msgid "relative name \"${val}\" irresolveable without package"
+msgstr "相关名字 \"${val}\" 无法找到"
+
+#: src/colander/__init__.py:1843
+msgid "\"${val}\" has no __name__"
+msgstr "\"${val}\" 没有 __name__"
+
+#: src/colander/__init__.py:1852
+msgid "\"${val}\" is not a string"
+msgstr "\"${val}\" 不是字符串"
+
+#: src/colander/__init__.py:1862
+msgid "The dotted name \"${name}\" cannot be imported"
+msgstr "点名字 \"${name}\" 无法导入"
+
+#: src/colander/__init__.py:1915 src/colander/__init__.py:2005
+msgid "Invalid date"
+msgstr "无效日期"
+
+#: src/colander/__init__.py:1932
+msgid "\"${val}\" is not a datetime object"
+msgstr "\"${val}\" 不是一个时间日期对象"
+
+#: src/colander/__init__.py:2020
+msgid "\"${val}\" is not a date object"
+msgstr "\"${val}\" 不是一个日期对象"
+
+# | msgid "Invalid date"
+#: src/colander/__init__.py:2085
+#, fuzzy
+msgid "Invalid time"
+msgstr "无效日期"
+
+# | msgid "\"${val}\" is not a datetime object"
+#: src/colander/__init__.py:2096
+#, fuzzy
+msgid "\"${val}\" is not a time object"
+msgstr "\"${val}\" 不是一个时间日期对象"
+
+#: src/colander/__init__.py:2161 src/colander/__init__.py:2177
+#, fuzzy
+#| msgid "\"${val}\" is not one of ${choices}"
+msgid "\"${val}\" is not a valid \"${cls}\""
+msgstr "\"${val}\" 不是这些值 ${choices} 中的一个"
+
+#: src/colander/__init__.py:2297
+msgid "Required"
+msgstr "必需"
+

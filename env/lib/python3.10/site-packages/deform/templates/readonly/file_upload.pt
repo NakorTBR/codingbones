@@ -1,0 +1,3 @@
+<p id="${oid|field.oid}" class="form-control-static deform-readonly-text"
+   tal:content="cstruct.get('filename') or ''">
+</p>

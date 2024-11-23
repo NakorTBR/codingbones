@@ -1,0 +1,834 @@
+Metadata-Version: 2.1
+Name: deform
+Version: 2.0.15
+Summary: Form library with advanced features like nested forms
+Home-page: https://docs.pylonsproject.org/projects/deform/en/latest/
+Author: Chris McDonough, Agendaless Consulting
+Author-email: pylons-discuss@googlegroups.com
+Maintainer: Steve Piercy
+Maintainer-email: web@stevepiercy.com
+License: BSD-derived
+Project-URL: Documentation, https://docs.pylonsproject.org/projects/deform/en/2.0-branch/
+Project-URL: Changelog, https://docs.pylonsproject.org/projects/deform/en/2.0-branch/changes.html
+Project-URL: Issue Tracker, https://github.com/Pylons/deform/issues
+Keywords: web forms form generation schema validation pyramid
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: Repoze Public License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: Chameleon (>=2.5.1)
+Requires-Dist: colander (>=1.0a1)
+Requires-Dist: iso8601
+Requires-Dist: peppercorn (>=0.3)
+Requires-Dist: translationstring (>=1.0)
+Requires-Dist: zope.deprecation
+Provides-Extra: dev
+Requires-Dist: black ; extra == 'dev'
+Requires-Dist: check-manifest ; extra == 'dev'
+Requires-Dist: flake8 ; extra == 'dev'
+Requires-Dist: flake8-bugbear ; extra == 'dev'
+Requires-Dist: flake8-builtins ; extra == 'dev'
+Requires-Dist: isort ; extra == 'dev'
+Requires-Dist: readme-renderer ; extra == 'dev'
+Requires-Dist: beautifulsoup4 ; extra == 'dev'
+Requires-Dist: coverage ; extra == 'dev'
+Requires-Dist: flaky ; extra == 'dev'
+Requires-Dist: pyramid ; extra == 'dev'
+Requires-Dist: pytest ; extra == 'dev'
+Requires-Dist: pytest-cov ; extra == 'dev'
+Requires-Dist: Sphinx (>=1.7.4) ; extra == 'dev'
+Requires-Dist: repoze.sphinx.autointerface ; extra == 'dev'
+Requires-Dist: pylons-sphinx-latesturl ; extra == 'dev'
+Requires-Dist: pylons-sphinx-themes ; extra == 'dev'
+Requires-Dist: pygments ; extra == 'dev'
+Requires-Dist: waitress ; extra == 'dev'
+Requires-Dist: lingua ; extra == 'dev'
+Requires-Dist: selenium (>=4.0a) ; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: Sphinx (>=1.7.4) ; extra == 'docs'
+Requires-Dist: repoze.sphinx.autointerface ; extra == 'docs'
+Requires-Dist: pylons-sphinx-latesturl ; extra == 'docs'
+Requires-Dist: pylons-sphinx-themes ; extra == 'docs'
+Provides-Extra: functional
+Requires-Dist: pygments ; extra == 'functional'
+Requires-Dist: waitress ; extra == 'functional'
+Requires-Dist: lingua ; extra == 'functional'
+Requires-Dist: selenium (>=4.0a) ; extra == 'functional'
+Provides-Extra: lint
+Requires-Dist: black ; extra == 'lint'
+Requires-Dist: check-manifest ; extra == 'lint'
+Requires-Dist: flake8 ; extra == 'lint'
+Requires-Dist: flake8-bugbear ; extra == 'lint'
+Requires-Dist: flake8-builtins ; extra == 'lint'
+Requires-Dist: isort ; extra == 'lint'
+Requires-Dist: readme-renderer ; extra == 'lint'
+Provides-Extra: testing
+Requires-Dist: beautifulsoup4 ; extra == 'testing'
+Requires-Dist: coverage ; extra == 'testing'
+Requires-Dist: flaky ; extra == 'testing'
+Requires-Dist: pyramid ; extra == 'testing'
+Requires-Dist: pytest ; extra == 'testing'
+Requires-Dist: pytest-cov ; extra == 'testing'
+
+Deform
+======
+
+.. image:: https://github.com/Pylons/deform/workflows/Build%20and%20test/badge.svg?branch=2.0-branch
+    :target: https://github.com/Pylons/deform/actions?query=workflow%3A%22Build+and+test%22+branch%3A2.0-branch
+    :alt: Build Status
+
+.. image:: https://img.shields.io/pypi/v/deform
+    :target: https://pypi.org/project/deform/
+    :alt: Current Release
+
+.. image:: https://readthedocs.org/projects/deform/badge/?version=latest
+    :target: https://docs.pylonsproject.org/projects/deform/en/latest/
+    :alt: Latest Documentation Status
+
+.. image:: https://img.shields.io/pypi/pyversions/deform
+    :alt: Python Support
+
+.. contents:: :local:
+
+
+Introduction
+------------
+
+Deform is a Python form library for generating HTML forms on the server side.
+`Date and time picking widgets <https://deformdemo.pylonsproject.org/datetimeinput/>`_,
+`rich text editors <https://deformdemo.pylonsproject.org/richtext/>`_, `forms with
+dynamically added and removed items
+<https://deformdemo.pylonsproject.org/sequence_of_mappings/>`_ and a few other `complex
+use cases <https://deformdemo.pylonsproject.org/>`_ are supported out of the box.
+
+Deform integrates with the `Pyramid web framework <https://trypyramid.com/>`_
+and several other web frameworks. Deform comes with `Chameleon templates
+<https://chameleon.readthedocs.io/en/latest/>`_ and `Bootstrap 3
+<https://getbootstrap.com/docs/3.3/>`_ styling. Under the hood, `Colander schemas
+<https://github.com/Pylons/colander>`_ are used for serialization and
+validation. The `Peppercorn <https://github.com/Pylons/peppercorn>`_ library
+maps HTTP form submissions to nested structure.
+
+Although Deform uses Chameleon templates internally, you can embed rendered
+Deform forms into any template language.
+
+Use cases
+---------
+
+Deform is ideal for complex server-side generated forms. Potential use cases
+include:
+
+* Complex data entry forms
+
+* Administrative interfaces
+
+* Python based websites with high amount of data manipulation forms
+
+* Websites where additional front end framework is not needed
+
+Installation
+------------
+
+Install using `pip and Python package installation best practices <https://packaging.python.org/tutorials/installing-packages/>`_::
+
+    pip install deform
+
+Example
+-------
+
+`See all widget examples <https://deformdemo.pylonsproject.org>`_. Below is a sample
+form loop using the `Pyramid <https://trypyramid.com/>`_ web framework.
+
+.. image:: https://github.com/Pylons/deform/raw/master/docs/example.png
+    :width: 400px
+
+Example code:
+
+.. code-block:: python
+
+    """Self-contained Deform demo example."""
+    from __future__ import print_function
+
+    from pyramid.config import Configurator
+    from pyramid.session import UnencryptedCookieSessionFactoryConfig
+    from pyramid.httpexceptions import HTTPFound
+
+    import colander
+    import deform
+
+
+    class ExampleSchema(deform.schema.CSRFSchema):
+
+        name = colander.SchemaNode(
+            colander.String(),
+            title="Name")
+
+        age = colander.SchemaNode(
+            colander.Int(),
+            default=18,
+            title="Age",
+            description="Your age in years")
+
+
+    def mini_example(request):
+        """Sample Deform form with validation."""
+
+        schema = ExampleSchema().bind(request=request)
+
+        # Create a styled button with some extra Bootstrap 3 CSS classes
+        process_btn = deform.form.Button(name='process', title="Process")
+        form = deform.form.Form(schema, buttons=(process_btn,))
+
+        # User submitted this form
+        if request.method == "POST":
+            if 'process' in request.POST:
+
+                try:
+                    appstruct = form.validate(request.POST.items())
+
+                    # Save form data from appstruct
+                    print("Your name:", appstruct["name"])
+                    print("Your age:", appstruct["age"])
+
+                    # Thank user and take him/her to the next page
+                    request.session.flash('Thank you for the submission.')
+
+                    # Redirect to the page shows after succesful form submission
+                    return HTTPFound("/")
+
+                except deform.exception.ValidationFailure as e:
+                    # Render a form version where errors are visible next to the fields,
+                    # and the submitted values are posted back
+                    rendered_form = e.render()
+        else:
+            # Render a form with initial default values
+            rendered_form = form.render()
+
+        return {
+            # This is just rendered HTML in a string
+            # and can be embedded in any template language
+            "rendered_form": rendered_form,
+        }
+
+
+    def main(global_config, **settings):
+        """pserve entry point"""
+        session_factory = UnencryptedCookieSessionFactoryConfig('seekrit!')
+        config = Configurator(settings=settings, session_factory=session_factory)
+        config.include('pyramid_chameleon')
+        deform.renderer.configure_zpt_renderer()
+        config.add_static_view('static_deform', 'deform:static')
+        config.add_route('mini_example', path='/')
+        config.add_view(mini_example, route_name="mini_example", renderer="templates/mini.pt")
+        return config.make_wsgi_app()
+
+This example is in `deformdemo repository <https://github.com/Pylons/deformdemo/>`_. Run the example with pserve::
+
+     pserve mini.ini --reload
+
+Status
+------
+
+This library is actively developed and maintained. Deform 2.x branch has been used in production on several sites since 2014. Automatic test suite has 100% Python code coverage and 500+ tests.
+
+Projects using Deform
+---------------------
+
+* `Websauna <https://websauna.org/>`_
+
+* `Kotti <http://kotti.pylonsproject.org/>`_
+
+* `Substance D <http://www.substanced.net/>`_
+
+Community and links
+-------------------
+
+* `Widget examples <https://deformdemo.pylonsproject.org>`_
+
+* `PyPI <https://pypi.org/project/deform/>`_
+
+* `Issue tracker <https://github.com/Pylons/deform/issues>`_
+
+* `Widget examples repo <https://github.com/Pylons/deformdemo/>`_
+
+* `Documentation <https://docs.pylonsproject.org/projects/deform/en/latest/>`_
+
+* `Support <https://pylonsproject.org/community-support.html>`_
+
+
+.. _2.0.15:
+
+2.0.15 (2020-12-10)
+-------------------
+
+Features and Fixes
+^^^^^^^^^^^^^^^^^^
+
+- Add support of Python 3.8 and 3.9.
+
+- Added a new widget ``SelectizeWidget`` based on the jQuery plugin
+  `selectize.js <https://github.com/selectize/selectize.js>`_. [stevepiercy]
+  https://github.com/Pylons/deform/issues/260
+
+- Improved handling of the ``readonly`` HTML attribute in certain widgets. The
+  ``readonly`` HTML form control attribute makes the element not mutable,
+  meaning the user cannot edit the control. When ``"readonly": "readonly"`` is
+  one of the items in a dict passed into the ``attributes`` option when
+  creating a widget, the rendered widget both prevents the user from changing
+  the value, and if the form does not pass validation after submitted then the
+  field value will be displayed.
+
+  ``readonly`` is supported by most form controls, but not all. Deform adds
+  some logic to add read-only support for a few of those form controls, as
+  described below.
+
+  ``CheckboxWidget`` and ``CheckboxChoiceWidget``
+    Due to the nature of how checkbox values are processed, the ``readonly``
+    attribute has no effect.
+    To achieve a read-only behavior, pass in ``attributes={"onclick": "return
+    false;"}``.
+    This will render as an inline JavaScript ``onclick="return false;"`` for
+    each checkbox item.
+
+  ``MoneyInputWidget``
+    The provided value will be displayed in the input and be not editable.
+
+  ``RadioChoiceWidget``
+    For the selected value it will render an attribute in the HTML as
+    ``readonly="readonly"``, and for all other values as
+    ``disabled="disabled"``.
+
+  ``SelectWidget``
+    For selection of single options only, the selected value will render an
+    attribute in the HTML as ``readonly="readonly"``, and for all other values
+    as ``disabled="disabled"``.
+    Multiple selections, set by the ``multiple=True`` option, do not support
+    the ``readonly`` attribute on the ``<select>`` element.
+    For multiple selections, use the ``SelectizeWidget``.
+
+  ``SelectizeWidget``
+    For both single and multiple selections, the selected value or values will
+    be rendered as selected, and the others will not be selectable.
+    Selectize uses JavaScript to "lock" the form control.
+
+  ``TextAreaWidget``
+    The provided value will be displayed in the input and be not editable.
+
+  ``TextInputWidget``
+    The provided value will be displayed in the input and be not editable.
+
+  [stevepiercy]
+  https://github.com/Pylons/deform/issues/260
+
+- Optionally bypass the resource registry and specify a resource as a dict
+  where its keys are the type of asset (``"js"`` or ``"css"``) and its values
+  are either a string or a list of strings of paths to assets on disk.
+  [tdamsma]
+  https://github.com/Pylons/deform/issues/485
+
+- Conditionally load ``jquery.maskedinput`` if and only if ``mask`` option is
+  provided. [tisdall, stevepiercy]
+  https://github.com/Pylons/deform/pull/487
+
+- Changed dateparts widget to use ``type="number"`` instead of default
+  ``text``. [stevepiercy]
+  https://github.com/Pylons/deform/issues/442
+
+- Clarify that a sequence type (list, tuple, or x/range) is required for values
+  passed into a ``SelectWidget`` or ``RadioChoiceWidget``. [stevepiercy]
+  https://github.com/Pylons/deform/issues/385
+
+- Switch from using nosetests to pytest as the test runner, as nosetests is no
+  longer maintained. [stevepiercy]
+  https://github.com/Pylons/deform/pull/497
+  https://github.com/Pylons/deform/pull/498
+
+- Switch from Travis-CI and Appveyor to GitHub Actions, due to Travis-CI
+  changing its plans to be ineffective for the Pylons Project. [stevepiercy]
+  https://github.com/Pylons/deform/pull/492
+  https://github.com/Pylons/deform/pull/495
+
+- Add Docker containerization of Deform and deformdemo as an option for running
+  tests, and improve related documentation. [sydoluciani]
+  https://github.com/Pylons/deform/pull/493
+  https://github.com/Pylons/deform/pull/494
+
+
+Deprecations
+^^^^^^^^^^^^
+
+- Drop support of Python 3.5.
+
+- ``Select2Widget`` is now deprecated and will be removed in Deform 3.0.0
+  because its jQuery plugin Select2 removed a lock feature in v4.0.0 and its
+  future development is uncertain. [stevepiercy]
+  https://github.com/Pylons/deform/issues/260
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- Add documentation of arbitrary HTML5 attributes for all widgets.
+  [stevepiercy]
+  https://github.com/Pylons/deform/issues/430
+
+- Add usage documentation of ``Date``, ``DateTime``, and ``Time`` widgets. Add
+  documentation reference to complex data loading, changing widgets, or
+  validating data to Colander. [stevepiercy]
+  https://github.com/Pylons/deform/pull/466
+
+
+.. _2.0.14:
+
+2.0.14 (2020-08-26)
+-------------------
+
+- Field.validate() now raises ``ValidationFailure`` upon peppercorn parse
+  failure.
+  See https://github.com/Pylons/deform/pull/242
+
+- Bump maskMoney.js to 3.1.1 and use minified version.
+  https://github.com/Pylons/deform/issues/412
+
+
+.. _2.0.13:
+
+2.0.13 (2020-08-25)
+-------------------
+
+- ``richtext.pt``: The contents of the ``RichTextWidget``'s <textarea>
+  was not HTML-escaped, but now it is.
+
+  Note that unescaped content is still rendered if ``delayed_load`` is
+  enabled.  Now, however, to avoid rendering unescaped non-validated
+  user input, ``delayed_load`` is ignored when redisplaying a field
+  containing an error.
+  See https://github.com/Pylons/deform/pull/204
+
+- This time, *really* update select2 widget to version 4.0.13.
+  See https://github.com/Pylons/deform/pull/459
+
+
+.. _2.0.12:
+
+2.0.12 (2020-08-23)
+-------------------
+
+- Update select2 widget to version 4.0.13.
+  See https://github.com/Pylons/deform/pull/441
+
+- Add the ``structure`` keyword to the autocomplete template's options to stop
+  its encoding.
+  See https://github.com/Pylons/deform/pull/445
+
+- Use the local HTML element for change event when removing/adding to DOM.
+  See https://github.com/Pylons/deform/pull/331
+
+- Fix deprecation warning when importing the module ``field.py`` while testing
+  with pytest.
+  See https://github.com/Pylons/deform/pull/419
+
+- Fix a bug that was introduced in 2.0.11 that made it such that the ``focus``
+  parameter on forms did not honor the ``off`` value for ``checkboxChoice`` and
+  ``radioChoice`` widgets.
+  See https://github.com/Pylons/deform/pull/453
+
+- Remove the unused variable ``namematch`` from deform.js.
+  See https://github.com/Pylons/deform/pull/454
+
+- Add i18n domain and Bootstrap styles to template ``readonly/password.pt``.
+  See https://github.com/Pylons/deform/pull/237
+
+
+.. _2.0.11:
+
+2.0.11 (2020-08-21)
+-------------------
+
+- Drop support of Python 3.4.
+
+- Changed the implementation of input autofocus from JavaScript to an HTML5
+  input attribute.
+
+  Forms now have an optional ``focus`` parameter (``on`` or ``off``) and fields
+  have an optional ``autofocus`` parameter.
+
+  -   If ``focus`` is ``on``, and at least one field has an ``autofocus``
+      schema parameter set to ``on``, the first of these fields will
+      receive focus on page load.
+  -   If ``focus`` is ``on`` or omitted, and no field has an
+      ``autofocus`` schema parameter set to ``on``, the first input of
+      the first form on the page will receive focus on page load.
+  -   If ``focus`` is ``off``, no focusing will be done.
+
+  Default: ``on``.
+  (This is unchanged from the JavaScript implementation.)
+
+  See https://github.com/Pylons/deform/pull/365/
+
+- Replace the flake8-isort plugin with plain old isort.
+  See https://github.com/Pylons/deform/pull/427
+
+- Improved the script that launches Selenium webdriver to clean up the locale
+  directory after completing a run of functional tests so that its files do not
+  get committed by accident. We also enforce coding style and add a formatter,
+  and improved the contributing documentation.
+  See https://github.com/Pylons/deform/pull/428
+
+- Updated Bootstrap to 3.4.1.
+
+
+.. _2.0.10:
+
+2.0.10 (2020-07-03)
+-------------------
+
+- Correct release date.
+
+
+.. _2.0.9:
+
+2.0.9 (2020-07-03)
+------------------
+
+- Added CSRF test to pass coverage on schema.py.
+  See https://github.com/Pylons/deform/pull/403
+
+- Modified the DateTimeInputWidget to use HTML5 date/time input types on
+  browsers that support it.
+  See https://github.com/Pylons/deform/pull/406
+
+- Add new translations for Swahili (sw_KE) locale.
+  See https://github.com/Pylons/deform/pull/409
+
+- Add boolean HTML attributes per Chameleon 3.8.0.
+
+  All checkboxes, radios, and selects that use boolean HTML attributes
+  (selected, checked, etc.) previously used `literal_false` and would drop any
+  `False` value from rendering as an HTML attribute. In Chameleon 3.8.0,
+  `literal_false` is removed and must instead use `boolean_attributes` to set
+  defaults.
+
+  See https://github.com/Pylons/deform/issues/417
+
+
+.. _2.0.8:
+
+2.0.8 (2019-10-07)
+------------------
+
+- Add HTML5 attributes to buttons.
+  See https://github.com/Pylons/deform/pull/390
+
+
+2.0.7 (2018-11-14)
+------------------
+
+- Add `tags` option support to `Select2Widget`
+  See https://github.com/Pylons/deform/pull/373
+
+- Change Python 3.7 to use stable version, 3.8-dev as allowed failure, in
+  Travis.
+  See https://github.com/Pylons/deform/pull/377
+
+- Update Bootstrap to 3.3.7.
+
+- Add support for HTML5 attributes (e.g. including placeholder and maxlength)
+  See https://github.com/Pylons/deform/pull/345
+
+2.0.6 (2018-08-29)
+------------------
+
+- Drop Python 3.3 support.
+  See https://github.com/Pylons/deform/pull/371
+
+- Add support to Python 3.7.
+
+- Make date_submit and time_submit optional in DateTimeInputWidget
+  See https://github.com/Pylons/deform/pull/369
+
+- Remove pinning of iso8601 to 0.1.11
+  See https://github.com/Pylons/deform/pull/364
+
+- i18n cleanup https://github.com/Pylons/deform/pull/367 and https://github.com/Pylons/deform/pull/368
+
+2.0.5 (2018-02-20)
+------------------
+
+- i18n cleanup https://github.com/Pylons/deform/pull/332 and https://github.com/Pylons/deform/pull/363
+
+- Fix bug in ``_FieldStorage`` under Python 3.x (issues #339 and #357).
+
+- Declare Python 3.6 compatibility and enable tests against Python 3.6 (all tests pass with no changes).
+
+- Closes #333: MANIFEST.in including docs, licenses and text files.
+
+- Add ``link`` button type See https://github.com/Pylons/deform/issues/166
+
+- Add traditional chinese localization
+
+2.0.4 (2017-02-11)
+------------------
+
+- Added ability to pass a translator function to `deform.renderer.configure_zpt_renderer`
+
+
+2.0.3 (2016-11-19)
+------------------
+
+- Added accordions to MappingWidget:
+  https://deformdemo.pylonsproject.org/mapping_accordion/
+
+- Added CSS class ``deform-form-buttons`` to style form button group:
+  https://github.com/Pylons/deform/pull/308
+
+- Add more options to ``TextAreaCSVWidget``:
+  https://github.com/Pylons/deform/pull/309
+
+- Always render an item with a default CSS class:
+  https://github.com/Pylons/deform/pull/306
+
+- Updated pickdate.js library used for the date picker:
+  https://github.com/Pylons/deform/pull/248
+
+- Widget Selenium test suite runs both under Python 2 and 3.
+  Lots of Selenium testing headache fixed with some implicit wait support.
+
+.. note::
+
+    Currently Python 3 file upload widget may have compatibility issues.
+    Please see ``deformdemo/test.py`` for details.
+
+2.0.2 (2016-11-14)
+------------------
+
+- Fix regression of ``<select>`` widget default values not honoured
+
+- Updated Select2 widget JavaScript
+
+2.0.1 (2016-10-25)
+------------------
+
+- Drop support for Python 2.6.
+
+- Documentation reorganization and clean up to conform with Pylons Project
+  projects.
+
+- Fix select and select2 widget templates failing on Python 3.x
+
+2.0 (2016-10-23)
+----------------
+
+- Release polish
+
+
+2.0b3 (2016-10-22)
+------------------
+
+- Update demos and add standalone mini example
+
+2.0b2 (2016-10-22)
+------------------
+
+- Fix README on PyPI
+
+2.0b1 (2016-10-22)
+------------------
+
+- Updated bootstrap to 3.3.6.
+
+- Fix dateparts.pt and datetimeinput.pt for changes in bootstrap v3.0.3.
+  (The culprit is boostrap commit
+  `853b69f <https://github.com/twbs/bootstrap/commit/853b69f2d>`_.)
+
+- Make ``dateinput`` work again by using the fixed name "date" as expected
+  by the pstruct schema.  See https://github.com/Pylons/deform/pull/221.
+
+- Changed ``ISO8601_REGEX`` import to match change in colander
+
+- Add support for Python 3.4, PyPy3.
+
+- Raise ``Invalid`` rather than other errors when deserializing broken
+  or malicious pstructs with invalid types.  See
+  https://github.com/Pylons/deform/pull/203
+
+- Read a time widget.
+
+- Fix a bug in the DateInputWidget.  See
+  https://github.com/Pylons/deform/pull/192.
+
+- Ensured that ``None`` would not show up as a css class name in rendered
+  template output.  See https://github.com/Pylons/deform/pull/191
+
+  we now use dashed-names (e.g. ``deform-seq``).  A full list of changes is
+  below::
+
+    Old                               New
+
+    deformClosebutton                 deform-closebutton
+    deformFileupload                  deform-file-upload
+    deformFormFieldset                deform-form-fieldset
+    deformInsertBefore                deform-insert-before
+    deformOrderbutton                 deform-orderbutton
+    deformProto                       deform-proto
+    deformReplaces                    deform-replaces
+    deformSeq                         deform-seq
+    deformSeqAdd                      deform-seq-add
+    deformSeqContainer                deform-seq-container
+    deformSeqItem                     deform-seq-item
+    deformSet-item                    deform-set-item
+    errorMsg                          error-msg
+    errorMsgLbl                       error-msg-lbl
+
+- Fixed handling of buttons in nested sequences.
+  See https://github.com/Pylons/deform/issues/197
+
+- Upload widget is themed like Bootstrap https://github.com/Pylons/deform/pull/280
+
+- Select widget handles the mixture of strings and ints https://github.com/Pylons/deform/pull/300/ and https://github.com/Pylons/deform/pull/299
+
+- Have the button css_class override the default button class. This is
+  backwards-incompatible and will require users of css_class to add a
+  btn-default/btn-primary class to the css_class.
+
+- Simplified Chinese translation https://github.com/Pylons/deform/pull/274
+
+- Don't cause unnecessary JavaScript calls on page load https://github.com/Pylons/deform/pull/267/
+
+- Allow override Button Bootstap CSS styles https://github.com/Pylons/deform/pull/251
+
+2.0a2 (2013-10-18)
+------------------
+
+- ``PasswordWidget`` and ``CheckedPasswordWidget`` have grown an additional
+  argument/attribute named ``redisplay``, which controls what happens on a
+  validation failure of a form involving such a field.  If ``redisplay`` is
+  ``True`` (the default), the password will be re-rendered into the form when
+  the form is re-rendered after validation failure.  If ``redisplay`` is
+  ``False``, the password will not be re-rendered into the form.  The default
+  is ``False``, which means that, as of this release, passwords will not
+  be redisplayed; this changes the default behavior wrt previous releases.
+  Values typed into password fields are not redisplayed by default during
+  validation failure, as a security measure (the value winds up in browser
+  history).  Use ``PasswordWidget(redisplay=True)`` or
+  ``CheckedPasswordWidget(redisplay=True)`` to make these widgets redisplay
+  passwords on validation failures, matching the old behavior.
+
+- When using the default Chameleon template renderer, template names can now
+  be "asset specifications" e.g. ``mypackage:subdir1/subdir2/mytemplate.pt``
+  instead of extensionless paths relative to a search path.  When
+  template names are specified as asset specifications, the
+  ``pkg_resources.resource_filename`` API is used to dereference them
+  into an actual file path.
+
+2.0a1 (2013-10-05)
+------------------
+
+This is an alpha release of Deform v2.  Deform v2 is backwards incompatible
+with Deform v1.  It requires the use of Twitter Bootstrap v3, whereas
+deform v1 did not require Bootstrap.
+
+A demonstration site that shows Deform 2 in action exists at
+https://deformdemo.pylonsproject.org.
+
+Both Deform 1 and Deform 2 will be maintained going forward.  If you wish
+to continue using Deform 1, because you cannot upgrade, or cannot depend on
+Bootstrap 3, please pin your deform distribution requirement to
+something below 2.0a1, e.g. ``deform<=1.999``.
+
+This first alpha release is missing formal documentation updates.  Apologies,
+we needed to get a release out onto PyPI, as not having one is holding back
+the development of a number of platforms and applications that depend on the
+changes in v2+.  Documentation updates will be forthcoming over the lifetime
+of future alpha/beta releases.  However, below is a list of known issues that
+need to be addressed to make a final release of Deform 2, as well as
+information about new features, and migration notes.  You may also be
+able to make use of the demo site at https://deformdemo.pylonsproject.org to
+divine how things have changed, and what CSS and JavaScript resources you'll
+need to include in your pages to make use of this release.
+
+TODO
+
+- docs
+- decide how to explain form.css (include in requirements or?)
+- horizontal/inline forms + structural things
+- assets for templates: deform should provide a tool to resolve that?
+- placeholder support for all textual inputs (and required/maxlength
+  see also https://github.com/Pylons/deform/pull/116)
+- display help-blocks for readonly fields?
+- maybe readonly should be a property of the schema, not the widget.
+- consider whether "style"/"css_class" on multi-input widgets should apply to
+  a container or each element.
+- audit use of e.g. string:${css_class} so we don't see unexpected class="None"
+  in widget rendering output.
+- some sort of test for mapping_item input_prepend/input_append
+- Currently description shows up as both tooltip of label and as help-block.
+  Maybe make these two things separate or at least don't show them both using
+  the same value.
+- normalize CSS class names to deform-foo rather than deformFoo
+- sequence_of_sequences: js that processes close/order buttons has to
+  be less promiscuous (it uses e.g. "find"); symptom: buttons
+  appear/disappear, act on the wrong element, etc... ugh 2013/10/05
+  cannot replicate, but still believe there may be an issue, but
+  maybe iElectric fixed it
+
+NICE TO HAVE
+
+- structural widget (mapping_item.pt) - do we need that or not or what? +
+  add a demo
+- prepend/append t.bootstrap stuff
+- https://github.com/Pylons/deform/pull/116#issuecomment-23210460
+- group demos by widget type
+- handle ajax demo more UX friendly
+- Put drag handles in panel headers: https://github.com/Pylons/deform/issues/180
+
+NEW FEATURES:
+
+- input_prepend/input_append in mapping_item widget.
+- field.parent
+- field.get_root
+- inline attr of checkboxchoice and radiochoice widgets (see
+  https://github.com/Pylons/deform/pull/182)
+- https://deformdemo.pylonsproject.org/
+
+MIGRATION NOTES:
+
+- removed deprecated `height, width, skin, theme` parameters from RichTextWidget
+  (use "options" instead)
+- removed deprecated `render_initial_item` from SequenceWidget
+- removed deprecated deform.Set (use colander.Set instead)
+- DateInputWidget renamed parameter `dateFormat` to `format` (dateFormat
+  now unsupported).
+- DateTimeInputWidget now renders as two fields: one for a date and one
+  for a time, using pickadate.
+- We no longer bother trying to use the native datetimeinput widget on any
+  browser, because the support is so spotty.
+- DateTimeInputWidget takes two options now: date_options and time_options
+  instead of a single options dictionary.  The options are pickadate
+  date/time options respectively.
+- It is no longer possible to do DateTimeWidget().options['a'] = 'foo'
+  or DateTimeWidget().date_options['a'] = 'foo'.  If you need to change
+  options imperatively, set the entire .options/.date_options dictionary.
+- merged TypeaheadInputWidget to AutocompleteInputWidget (removed delay
+  parameter)
+- AutocompleteInputWidget now accepts string type for "values"
+- widgets no longer accepts "size" (instead use style="width: x"), except
+  SelectWidget (it means the size of the dropdown)
+- get_widget_resources now returns asset specifications rather than
+  deform-static-relative paths
+- deform 2.0 requires users to manually load TB 3.0 and jquery 2.0
+- required labels no longer insert an asterisk inside a <span class="req">
+  inside themselves.  instead the label element has a required class
+  if the field is required; use form.css to display this as an asterisk.
+- min_length of AutocompleteInputWidget now defaults to 1 (was 2)
+
+

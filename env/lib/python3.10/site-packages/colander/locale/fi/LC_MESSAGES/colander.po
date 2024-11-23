@@ -1,0 +1,189 @@
+# Finnish translations for colander.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the colander project.
+# Antti Haapala <antti.haapala@anttipatterns.fi>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: colander 1.0b1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-01-02 19:48-0600\n"
+"PO-Revision-Date: 2015-10-04 09:39+0200\n"
+"Last-Translator: Antti Haapala <antti.haapala@anttipatterns.fi>\n"
+"Language: fi\n"
+"Language-Team: Finnish\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: src/colander/__init__.py:319
+msgid "Invalid value"
+msgstr "Epäkelpo arvo"
+
+#: src/colander/__init__.py:375
+msgid "String does not match expected pattern"
+msgstr "Merkkijono ei ole odotetun muotoinen"
+
+#: src/colander/__init__.py:405
+msgid "Invalid email address"
+msgstr "Epäkelpo sähköpostiosoite"
+
+#: src/colander/__init__.py:434
+msgid "Not a data URL"
+msgstr ""
+
+# | msgid "Invalid time"
+#: src/colander/__init__.py:435
+#, fuzzy
+msgid "Invalid MIME type"
+msgstr "Epäkelpo aika"
+
+#: src/colander/__init__.py:436
+msgid "Invalid Base64 encoded data"
+msgstr ""
+
+#: src/colander/__init__.py:494
+msgid "${val} is less than minimum value ${min}"
+msgstr "${val} on vähemmän kuin pienin arvo ${min}"
+
+#: src/colander/__init__.py:495
+msgid "${val} is greater than maximum value ${max}"
+msgstr "${val} on suurempi kuin suurin arvo ${max}"
+
+#: src/colander/__init__.py:545
+msgid "Shorter than minimum length ${min}"
+msgstr "Lyhyempi kuin pienin pituus ${min}"
+
+#: src/colander/__init__.py:546
+msgid "Longer than maximum length ${max}"
+msgstr "Pidempi kuin suurin pituus ${max}"
+
+#: src/colander/__init__.py:569
+msgid "\"${val}\" is not one of ${choices}"
+msgstr "\"${val}\" ei joukosta ${choices}"
+
+# | msgid "\"${val}\" is not one of ${choices}"
+#: src/colander/__init__.py:593
+#, fuzzy
+msgid "\"${val}\" must not be one of ${choices}"
+msgstr "\"${val}\" ei joukosta ${choices}"
+
+#: src/colander/__init__.py:616
+msgid "One or more of the choices you made was not acceptable"
+msgstr "Yksi tai useampi tekemistäsi valinnoista eivät olleet hyväksyttäviä"
+
+#: src/colander/__init__.py:639 src/colander/__init__.py:648
+msgid "\"${val}\" is not a valid credit card number"
+msgstr "\"${val}\" ei ole kelpo luottokortinnumero"
+
+#: src/colander/__init__.py:720
+msgid "Must be a URL"
+msgstr "Pitää olla URL-osoite"
+
+#: src/colander/__init__.py:731
+msgid "Must be a file:// URI scheme"
+msgstr ""
+
+#: src/colander/__init__.py:737
+msgid "Invalid UUID string"
+msgstr ""
+
+#: src/colander/__init__.py:839
+msgid "\"${val}\" is not a mapping type: ${err}"
+msgstr "\"${val}\" ei ole assosiatiivistä tyyppiä (ts. mapping type): ${err}"
+
+#: src/colander/__init__.py:889
+msgid "Unrecognized keys in mapping: \"${val}\""
+msgstr "Tunnistamattomia avaimia arvossa:  \"${val}\""
+
+#: src/colander/__init__.py:990 src/colander/__init__.py:1230
+msgid "\"${val}\" is not iterable"
+msgstr "\"${val}\" ei ole iteroitava"
+
+#: src/colander/__init__.py:998
+msgid ""
+"\"${val}\" has an incorrect number of elements (expected ${exp}, was "
+"${was})"
+msgstr "Arvossa \"${val}\" on väärä määrä alkioita (odotettu ${exp}, oli ${was})"
+
+#: src/colander/__init__.py:1141 src/colander/__init__.py:1172
+msgid "${cstruct} is not iterable"
+msgstr "${cstruct} ei ole iteroitava"
+
+#: src/colander/__init__.py:1462
+msgid "${val} cannot be serialized: ${err}"
+msgstr "${val} ei serialisoitunut: ${err}"
+
+#: src/colander/__init__.py:1484
+msgid "${val} is not a string: ${err}"
+msgstr "${val} ei ole merkkijono: ${err}"
+
+#: src/colander/__init__.py:1507 src/colander/__init__.py:1518
+msgid "\"${val}\" is not a number"
+msgstr "\"${val}\" ei ole luku"
+
+#: src/colander/__init__.py:1697
+msgid "${val} is not a string"
+msgstr "${val} ei ole merkkijono"
+
+#: src/colander/__init__.py:1709
+msgid "\"${val}\" is neither in (${false_choices}) nor in (${true_choices})"
+msgstr ""
+"\"${val}\" yksikään joukosta (${false_choices}) tai joukosta "
+"(${true_choices})"
+
+#: src/colander/__init__.py:1775 src/colander/__init__.py:1794
+#: src/colander/__init__.py:1806
+msgid "relative name \"${val}\" irresolveable without package"
+msgstr "Suhteellista nimeä \"${val}\"  ei voi selvittää ilman pakettia"
+
+#: src/colander/__init__.py:1843
+msgid "\"${val}\" has no __name__"
+msgstr "Arvolla \"${val}\" ei ole attribuuttia __name__"
+
+#: src/colander/__init__.py:1852
+msgid "\"${val}\" is not a string"
+msgstr "\"${val}\" ei ole merkkijono"
+
+#: src/colander/__init__.py:1862
+msgid "The dotted name \"${name}\" cannot be imported"
+msgstr "Pisteellistä nimeä \"${name}\" ei voi tuoda"
+
+#: src/colander/__init__.py:1915 src/colander/__init__.py:2005
+msgid "Invalid date"
+msgstr "Epäkelpo päivämäärä"
+
+#: src/colander/__init__.py:1932
+msgid "\"${val}\" is not a datetime object"
+msgstr "\"${val}\" ei ole datetime-luokan olio"
+
+#: src/colander/__init__.py:2020
+msgid "\"${val}\" is not a date object"
+msgstr "\"${val}\" ei ole date-luokan olio"
+
+#: src/colander/__init__.py:2085
+msgid "Invalid time"
+msgstr "Epäkelpo aika"
+
+#: src/colander/__init__.py:2096
+msgid "\"${val}\" is not a time object"
+msgstr "\"${val}\" ei ole time-luokan olio"
+
+# | msgid "\"${val}\" is not one of ${choices}"
+#: src/colander/__init__.py:2161 src/colander/__init__.py:2177
+#, fuzzy
+msgid "\"${val}\" is not a valid \"${cls}\""
+msgstr "\"${val}\" ei joukosta ${choices}"
+
+#: src/colander/__init__.py:2297
+msgid "Required"
+msgstr "Vaadittu"
+
+#~ msgid "fail ${val}"
+#~ msgstr "virhe ${val}"
+
+#~ msgid "${val}: ${choices}"
+#~ msgstr "${val}: ${choices}"
+

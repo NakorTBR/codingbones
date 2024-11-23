@@ -6,6 +6,9 @@
             <p class="lead">Welcome to <span class="font-normal">${project}</span>. &nbsp;No AI, just generate a skeleton and go.
             A project by<br><span class="font-normal">Aaron Goselin</span>.</p>
         </div>
+        <div>
+        ${structure:rendered_form}
+        </div>
 
     </div>
 </div>
