@@ -1,8 +1,8 @@
-from pyramid.view import view_config
-from pyramid.response import Response
-from sqlalchemy.exc import SQLAlchemyError
-import deform
-import colander
+from pyramid.view import view_config # type: ignore
+from pyramid.response import Response # type: ignore
+from sqlalchemy.exc import SQLAlchemyError # type: ignore
+import deform # type: ignore
+import colander # type: ignore
 
 from .. import models
 
@@ -17,6 +17,14 @@ class ExampleSchema(deform.schema.CSRFSchema):
         default=18,
         title="Age",
         description="Your age in years")
+    
+    ntemplate = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=800),
+        widget=deform.widget.TextAreaWidget(rows=10, cols=60),
+        title = "Template",
+        description = "Modify template if you wish for a different structure"
+    )
 
 @view_config(route_name='home', renderer='codingbones:templates/mytemplate.pt')
 def my_view(request):
@@ -25,11 +33,12 @@ def my_view(request):
         one = query.filter(models.MyModel.name == 'one').one()
 
         # Testing code.
-        # Limited work time will remain for the next while.  Pushing and done for the day.
         schema = ExampleSchema().bind(request=request)
         process_btn = deform.form.Button(name='process', title="Process")
         form = deform.form.Form(schema, buttons=(process_btn,))
         rendered_form = form.render()
+        # Testing accessing the data from the post.
+        print(list(request.POST.items()))
     except SQLAlchemyError:
         return Response(db_err_msg, content_type='text/plain', status=500)
     return {
