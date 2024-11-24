@@ -1,4 +1,4 @@
-from sqlalchemy import (
+from sqlalchemy import ( # type: ignore
     Column,
     Index,
     Integer,
@@ -8,6 +8,8 @@ from sqlalchemy import (
 from .meta import Base
 
 
+# Got caught up doing maintence work for a client.
+# Need to make more useful model for testing.
 class MyModel(Base):
     __tablename__ = 'models'
     id = Column(Integer, primary_key=True)

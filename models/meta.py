@@ -1,5 +1,5 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.schema import MetaData
+from sqlalchemy.ext.declarative import declarative_base # type: ignore
+from sqlalchemy.schema import MetaData # type: ignore
 
 # Recommended naming convention used by Alembic, as various different database
 # providers will autogenerate vastly different names making migrations more
