@@ -28,6 +28,7 @@ class ExampleSchema(deform.schema.CSRFSchema):
 
 @view_config(route_name='home', renderer='codingbones:templates/mytemplate.pt')
 def my_view(request):
+    
     try:
         query = request.dbsession.query(models.MyModel)
         one = query.filter(models.MyModel.name == 'one').one()
@@ -38,7 +39,23 @@ def my_view(request):
         form = deform.form.Form(schema, buttons=(process_btn,))
         rendered_form = form.render()
         # Testing accessing the data from the post.
-        print(list(request.POST.items()))
+        # print(list(request.POST.items()))
+
+        # TODO: Fix the following
+        # Have to leave off here.  This block (if statement) appears to be in the wrong place.
+        if 'submit' in request.POST: # detect that the submit button was clicked
+            print("VERY NOTICEABLE TEXT HERE")
+            controls = request.POST.items() # get the form controls
+
+            try:
+                appstruct = form.validate(controls)  # call validate
+            except ValidationFailure as e: # catch the exception
+                return {'form':e.render()} # re-render the form with an exception
+
+            print(f"Base template is: {appstruct['base_template']}")
+            # the form submission succeeded, we have the data
+            return {'form':None, 'appstruct':appstruct}
+        
     except SQLAlchemyError:
         return Response(db_err_msg, content_type='text/plain', status=500)
     return {

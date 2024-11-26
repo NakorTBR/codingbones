@@ -1,8 +1,8 @@
 import argparse
 import sys
 
-from pyramid.paster import bootstrap, setup_logging
-from sqlalchemy.exc import OperationalError
+from pyramid.paster import bootstrap, setup_logging # type: ignore
+from sqlalchemy.exc import OperationalError # type: ignore
 
 from .. import models
 
@@ -14,6 +14,8 @@ def setup_models(dbsession):
     """
     model = models.mymodel.MyModel(name='one', value=1)
     dbsession.add(model)
+    test_model = models.testmodel.TestModel(name="Test", age=44, base_template = "int main()")
+    dbsession.add(test_model)
 
 
 def parse_args(argv):
