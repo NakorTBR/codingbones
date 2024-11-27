@@ -36,13 +36,16 @@ def my_view(request):
         # Testing code.
         schema = ExampleSchema().bind(request=request)
         process_btn = deform.form.Button(name='process', title="Process")
-        form = deform.form.Form(schema, buttons=(process_btn,))
+        form = deform.form.Form(schema, buttons=(process_btn,), use_ajax=True)
         rendered_form = form.render()
         # Testing accessing the data from the post.
         # print(list(request.POST.items()))
 
-        # TODO: Fix the following
-        # Have to leave off here.  This block (if statement) appears to be in the wrong place.
+        # def succeed():
+        #     return Response('<div id="thanks">Thanks!</div>')
+
+        # return render_form(form, success=succeed)
+
         if 'submit' in request.POST: # detect that the submit button was clicked
             print("VERY NOTICEABLE TEXT HERE")
             controls = request.POST.items() # get the form controls

@@ -1,0 +1,13 @@
+<div metal:use-macro="load: test_layout.pt">
+    <div metal:fill-slot="content">
+
+        <div class="content">
+            <h1><span class="font-semi-bold">Coding.Bones()</span> <span class="smaller">A coding quickstart tool</span></h1>
+            <p class="lead">Welcome to <span class="font-normal">${project}</span>. &nbsp;No AI, just generate a skeleton and go.</p>
+        </div>
+        <div>
+        ${structure:rendered_form}
+        </div>
+
+    </div>
+</div>
