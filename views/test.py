@@ -3,8 +3,24 @@ from pyramid.response import Response # type: ignore
 from sqlalchemy.exc import SQLAlchemyError # type: ignore
 import deform # type: ignore
 import colander # type: ignore
+import pprint
+import sys
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import PythonLexer
 
 from .. import models
+
+PY3 = sys.version_info[0] == 3
+PY38MIN = sys.version_info[0] == 3 and sys.version_info[1] >= 8
+
+if PY3:
+
+    def unicode(val, encoding="utf-8"):
+        return val
+
+formatter = HtmlFormatter(nowrap=True)
+css = formatter.get_style_defs()
 
 class ExampleSchema(deform.schema.CSRFSchema):
 
@@ -25,6 +41,18 @@ class ExampleSchema(deform.schema.CSRFSchema):
         title = "Template",
         description = "Modify template if you wish for a different structure"
     )
+
+# def my_safe_repr(obj, context, maxlevels, level, sort_dicts=True):
+#     if type(obj) == unicode:
+#         obj = obj.encode("utf-8")
+
+#     # Python 3.8 changed the call signature of pprint._safe_repr.
+#     # by adding sort_dicts.
+#     if PY38MIN:
+#         # return pprint._safe_repr(obj, context, maxlevels, level, sort_dicts)
+#         return pprint.pp(obj, stream=context, depth=maxlevels, indent=level)
+#     else:
+#         return pprint._safe_repr(obj, context, maxlevels, level)
 
 
 class DeformDemo(object):
@@ -69,17 +97,17 @@ class DeformDemo(object):
         # code, start, end = self.get_code(2)
         # locale_name = get_locale_name(self.request)
 
-        # reqts = form.get_widget_resources()
+        reqts = form.get_widget_resources()
 
-        # printer = pprint.PrettyPrinter()
+        printer = pprint.PrettyPrinter()
         # printer.format = my_safe_repr
-        # output = printer.pformat(captured)
-        # captured = highlight(output, PythonLexer(), formatter)
+        output = printer.pformat(captured)
+        captured = highlight(output, PythonLexer(), formatter)
 
         # values passed to template for rendering
         return {
-            # "form": html,
-            # "captured": captured,
+            "form": html,
+            "captured": captured,
             # "code": code,
             # "start": start,
             # "end": end,
@@ -87,8 +115,8 @@ class DeformDemo(object):
             # "locale": locale_name,
             # "demos": self.get_demos(),
             # "title": self.get_title(),
-            # "css_links": reqts["css"],
-            # "js_links": reqts["js"],
+            "css_links": reqts["css"],
+            "js_links": reqts["js"],
         }
     
     @view_config(route_name='test', renderer='codingbones:templates/test_template.pt')
@@ -119,6 +147,7 @@ class DeformDemo(object):
 
         # Have drilled down to this as the cuplrit.
         # Getting a name error "NameError: project" (whatever that means).
-        # It seems that when this is being returned it is clasing with the PT?  Not sure.
+        # It seems that when this is being returned it is clashing with the PT?  Not sure.
         # Still feeling terrible from yesterday's hospital stay.
+        # ^^^ Still today too.
         return self.render_form(form, success=succeed)
