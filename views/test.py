@@ -150,4 +150,6 @@ class DeformDemo(object):
         # It seems that when this is being returned it is clashing with the PT?  Not sure.
         # Still feeling terrible from yesterday's hospital stay.
         # ^^^ Still today too.
+        # As frustrating as it is, this is another sick day.  I did work yesterday pushing through,
+        # but today I can't.
         return self.render_form(form, success=succeed)
