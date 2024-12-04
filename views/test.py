@@ -152,4 +152,6 @@ class DeformDemo(object):
         # ^^^ Still today too.
         # As frustrating as it is, this is another sick day.  I did work yesterday pushing through,
         # but today I can't.
+        # Wow, that was a brutal sick period.  I think tomorrow I can actually get back to coding.
+        # I got some things done today but not much actual code to submit.
         return self.render_form(form, success=succeed)
