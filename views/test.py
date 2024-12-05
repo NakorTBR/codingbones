@@ -106,17 +106,11 @@ class DeformDemo(object):
 
         # values passed to template for rendering
         return {
-            "form": html,
+            "rendered_form": html, # Important that this matches the var name in the PT.
             "captured": captured,
-            # "code": code,
-            # "start": start,
-            # "end": end,
-            # "is_i18n": is_i18n,
-            # "locale": locale_name,
-            # "demos": self.get_demos(),
-            # "title": self.get_title(),
             "css_links": reqts["css"],
             "js_links": reqts["js"],
+            "project": "codingbones",
         }
     
     @view_config(route_name='test', renderer='codingbones:templates/test_template.pt')
@@ -145,13 +139,8 @@ class DeformDemo(object):
         def succeed():
             return Response('<div id="thanks">Thanks!</div>')
 
-        # Have drilled down to this as the cuplrit.
-        # Getting a name error "NameError: project" (whatever that means).
-        # It seems that when this is being returned it is clashing with the PT?  Not sure.
-        # Still feeling terrible from yesterday's hospital stay.
-        # ^^^ Still today too.
-        # As frustrating as it is, this is another sick day.  I did work yesterday pushing through,
-        # but today I can't.
-        # Wow, that was a brutal sick period.  I think tomorrow I can actually get back to coding.
-        # I got some things done today but not much actual code to submit.
+        # No longer getting an exception, but the form return is NOT inline.
+        # Also, it's ugly.  Need to change the look of the mapping and have it not say "mapping" lol.
+        # TODO: MUST be inline return.
+        # One colour for success, and red or something for error.
         return self.render_form(form, success=succeed)
