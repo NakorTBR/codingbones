@@ -116,7 +116,7 @@ class DeformDemo(object):
     @view_config(route_name='test', renderer='codingbones:templates/test_template.pt')
     def ajaxform(self):
         # return Response("Thanks!")
-        class Mapping(colander.Schema):
+        class Farking(colander.Schema):
             name = colander.SchemaNode(
                 colander.String(), description="Content name"
             )
@@ -128,7 +128,7 @@ class DeformDemo(object):
         
         class Schema(colander.Schema):
             number = colander.SchemaNode(colander.Integer())
-            mapping = Mapping()
+            farking = Farking()
             richtext = colander.SchemaNode(
                 colander.String(), widget=deform.widget.RichTextWidget()
             )
