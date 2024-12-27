@@ -140,10 +140,13 @@ class DeformDemo(object):
         form = deform.Form(schema, buttons=("submit",), use_ajax=True)
 
         def succeed():
+            # This is overwriting the entire page, but obviously shouldn't.
             return Response('<div id="thanks">Thanks!</div>')
 
         # No longer getting an exception, but the form return is NOT inline.
         # Also, it's ugly.  Need to change the look of the mapping and have it not say "mapping" lol.
         # TODO: MUST be inline return.
         # One colour for success, and red or something for error.
+        # So it is technically inline, except that it is rewriting the entire page that is rendered.
+        # Will have to figure it out tomorrow I think.
         return self.render_form(form, success=succeed)
