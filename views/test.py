@@ -116,6 +116,8 @@ class DeformDemo(object):
     @view_config(route_name='test', renderer='codingbones:templates/test_template.pt')
     def ajaxform(self):
         # return Response("Thanks!")
+        # This class can be named whatever, but what it is named will be shown as the section title.
+        # Maybe this can be disabled, I'm not sure yet.
         class Farking(colander.Schema):
             name = colander.SchemaNode(
                 colander.String(), description="Content name"
@@ -128,7 +130,8 @@ class DeformDemo(object):
         
         class Schema(colander.Schema):
             number = colander.SchemaNode(colander.Integer())
-            farking = Farking()
+            farking = Farking(title="Open by default",
+                widget=deform.widget.MappingWidget(template="mapping_accordion", open=True))
             richtext = colander.SchemaNode(
                 colander.String(), widget=deform.widget.RichTextWidget()
             )

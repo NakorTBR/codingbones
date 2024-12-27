@@ -35,6 +35,27 @@ h6 {
   color: #ffffff !important;
 }
 
+.deform-collapse-heading > a {
+  display: block !important; /* Make target area more touch friendly */
+  text-decoration: none !important;
+  color: #FFFFFF !important;
+  font-weight: 400 !important;
+}
+
+
+.deform-collapse-heading > a:after {
+  /* symbol for "opening" panels */
+  font-family: 'Glyphicons Halflings' !important;  /* essential for enabling glyphicon */
+  float: right !important;        /* adjust as needed */
+  content: "\e080" !important;    /* adjust as needed, taken from bootstrap.css */
+
+}
+
+.deform-collapse-heading > a[aria-expanded="true"]:after {
+  /* symbol for "collapsed" panels */
+  content: "\e114" !important;
+}
+
 p {
   font-weight: 300;
 }
