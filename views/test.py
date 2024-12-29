@@ -149,4 +149,5 @@ class DeformDemo(object):
         # One colour for success, and red or something for error.
         # So it is technically inline, except that it is rewriting the entire page that is rendered.
         # Will have to figure it out tomorrow I think.
+        # Or tomorrow lol.
         return self.render_form(form, success=succeed)
