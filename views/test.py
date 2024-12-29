@@ -8,6 +8,7 @@ import sys
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PythonLexer
+import datetime
 
 from .. import models
 
@@ -75,14 +76,19 @@ class DeformDemo(object):
         if submitted in self.request.POST:
             # the request represents a form submission
             try:
-                # try to validate the submitted values
                 controls = self.request.POST.items()
                 captured = form.validate(controls)
                 if success:
-                    response = success()
-                    if response is not None:
-                        return response
-                html = form.render(captured)
+                    success_message = success()  # Call the success function
+                    return {
+                        "rendered_form": form.render(captured),
+                        "captured": captured,
+                        "css_links": form.get_widget_resources()["css"],
+                        "js_links": form.get_widget_resources()["js"],
+                        "project": "codingbones",
+                        "success_message": success_message, # Include the success message
+                    }
+                html = form.render(captured) # This is the line that was missing before.
             except deform.ValidationFailure as e:
                 # the submitted values could not be validated
                 html = e.render()
@@ -104,6 +110,10 @@ class DeformDemo(object):
         output = printer.pformat(captured)
         captured = highlight(output, PythonLexer(), formatter)
 
+        # if success is not None and callable(success):
+        #     success_message = success()
+        #     print(f"-=-=-=-=-=-=--={success_message}=-=-=-=-=-=-=-=-=-=")
+
         # values passed to template for rendering
         return {
             "rendered_form": html, # Important that this matches the var name in the PT.
@@ -111,6 +121,7 @@ class DeformDemo(object):
             "css_links": reqts["css"],
             "js_links": reqts["js"],
             "project": "codingbones",
+            "success_message": None,
         }
     
     @view_config(route_name='test', renderer='codingbones:templates/test_template.pt')
@@ -140,11 +151,12 @@ class DeformDemo(object):
         form = deform.Form(schema, buttons=("submit",), use_ajax=True)
 
         def succeed():
-            # This is overwriting the entire page, but obviously shouldn't.
-            return Response('<div id="thanks">Thanks!</div>')
-
+            now = datetime.datetime.now()
+            # timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+            timestamp = now.strftime("%d-%m-%Y %H:%M:%S")
+            return f'Template updated @{timestamp}'
+        
         # No longer getting an exception, but the form return is NOT inline.
-        # Also, it's ugly.  Need to change the look of the mapping and have it not say "mapping" lol.
         # TODO: MUST be inline return.
         # One colour for success, and red or something for error.
         # So it is technically inline, except that it is rewriting the entire page that is rendered.

@@ -7,6 +7,9 @@
         </div>
         <div>
         ${structure:rendered_form}
+        <div tal:condition="success_message" id="success-message">
+            ${success_message | h}
+        </div>
         </div>
 
     </div>
