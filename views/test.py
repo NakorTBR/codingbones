@@ -1,3 +1,4 @@
+from codingbones.models.testmodel import TestModel
 from pyramid.view import view_config # type: ignore
 from pyramid.response import Response # type: ignore
 from sqlalchemy.exc import SQLAlchemyError # type: ignore
@@ -11,6 +12,13 @@ from pygments.lexers import PythonLexer
 import datetime
 
 from .. import models
+
+# from sqlalchemy import create_engine
+# from sqlalchemy.engine import URL
+# from sqlalchemy.orm import sessionmaker
+
+import transaction
+from codingbones.models import get_tm_session
 
 PY3 = sys.version_info[0] == 3
 PY38MIN = sys.version_info[0] == 3 and sys.version_info[1] >= 8
@@ -80,6 +88,34 @@ class DeformDemo(object):
                 captured = form.validate(controls)
                 if success:
                     success_message = success()  # Call the success function
+
+                    # Write to DB
+                    # url = URL.create(
+                    #     drivername="postgresql",
+                    #     username="nakor",
+                    #     host="/tmp/postgresql/socket",
+                    #     database="codingbones"
+                    # )
+
+                    # engine = create_engine(url)
+                    # connection = engine.connect()
+
+                    # print(f"-=-=-=-=-=-=-=-=-=- {self.request.tm}")
+                    # self.request.config.include('codingbones.models')
+                    # tm = transaction.TransactionManager(explicit=True)
+                    # tm = self.request.tm
+                    # with tm:
+                    #     dbsession = get_tm_session(self.request.config.registry['dbsession_factory'], tm)
+
+                    # Data went into the table on refresh.  Obviously don't love that but whatever.
+                    # Now we will have to check for duplicate entries and update template instead if it exists.
+                    simple_test = TestModel(name="Test Name", age=446, base_template="int main(foo)")
+                    self.request.dbsession.add(simple_test)
+                    # Must use this rather than dbsession to commit.
+                    transaction.commit()
+                    # self.request.dbsession.commit()
+                    # self.request.dbsession.flush()
+
                     return {
                         "rendered_form": form.render(captured),
                         "captured": captured,
