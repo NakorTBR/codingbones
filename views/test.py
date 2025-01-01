@@ -17,7 +17,7 @@ from .. import models
 # from sqlalchemy.engine import URL
 # from sqlalchemy.orm import sessionmaker
 
-import transaction
+import transaction # type: ignore
 from codingbones.models import get_tm_session
 
 PY3 = sys.version_info[0] == 3
@@ -90,21 +90,41 @@ class DeformDemo(object):
                     success_message = success()  # Call the success function
                     sesh = self.request.dbsession
 
-                    # Data went into the table on refresh.  Obviously don't love that but whatever.
-                    # Now we will have to check for duplicate entries and update template instead if it exists.
-                    # simple_test = TestModel(name="Test Name", age=446, base_template="int main(foo)")
+                    print(captured)
+
+                    # NOTE: This WILL cause an error if it already exists.  Always check first,
+                    # although really the user should be created when an account is opened, and 
+                    # a model should never be added to a user that does not exist.  Idealy.
+                    # simple_test = TestModel(name="Nakor", age=44, base_template="int main(foo)")
                     # self.request.dbsession.add(simple_test)
 
                     # Doing a query to retrieve a specific entry
                     q = sesh.query(TestModel)
-                    located = q.filter(TestModel.name == "Test Name").first()
-                    print(f"Located record template is: {located.base_template}")
+                    # located = q.filter(TestModel.name == "Test Name").first()
+                    # print(f"Located record template is: {located.base_template}")
+                    exist_test = q.filter(TestModel.name == captured["farking"]["name"]).first()
+                    if exist_test:
+                        print(f"User found:  {exist_test.name}")
+                    else:
+                        # Not creating a new user here.  When an account is created the user will
+                        # be added to the DB there.
+                        print("User does not exist!")
 
                     # Doing a query to update an entry
-                    update_me = q.filter(TestModel.name == "Test Name")
-                    update_me.update({TestModel.base_template: captured["richtext"]})
+                    update_me = q.filter(TestModel.name == captured["farking"]["name"])
+                    
+                    # Whatver form was submitted all that will need to change will be the first 
+                    # dictionary name (as in "farking" here).
+                    update_me.update({TestModel.base_template: captured["farking"]["template"]})
 
-                    # print(captured["richtext"])
+                    # Invalid entry attempt
+                    fail = q.filter(TestModel.name == "Does Not Exist").first()
+                    if fail:
+                        print(f"How will it fail?  {fail.base_template}")
+                    else:
+                        print("Object was invalid")
+
+                    # print(captured["template"])
 
                     # Must use this rather than dbsession to commit.
                     transaction.commit()
@@ -169,14 +189,15 @@ class DeformDemo(object):
                 widget=deform.widget.DatePartsWidget(),
                 description="Content date",
             )
-        
-        class Schema(colander.Schema):
-            number = colander.SchemaNode(colander.Integer())
-            farking = Farking(title="Open by default",
-                widget=deform.widget.MappingWidget(template="mapping_accordion", open=True))
-            richtext = colander.SchemaNode(
+            template = colander.SchemaNode(
                 colander.String(), widget=deform.widget.RichTextWidget()
             )
+        
+        class Schema(colander.Schema):
+            # Each mapping object (like Farking) will be included in the schema here.
+            farking = Farking(title="Template Update",
+                widget=deform.widget.MappingWidget(template="mapping_accordion", open=True))
+            
         
         schema = Schema()
         form = deform.Form(schema, buttons=("submit",), use_ajax=True)
