@@ -88,29 +88,24 @@ class DeformDemo(object):
                 captured = form.validate(controls)
                 if success:
                     success_message = success()  # Call the success function
-
-                    # Write to DB
-                    # url = URL.create(
-                    #     drivername="postgresql",
-                    #     username="nakor",
-                    #     host="/tmp/postgresql/socket",
-                    #     database="codingbones"
-                    # )
-
-                    # engine = create_engine(url)
-                    # connection = engine.connect()
-
-                    # print(f"-=-=-=-=-=-=-=-=-=- {self.request.tm}")
-                    # self.request.config.include('codingbones.models')
-                    # tm = transaction.TransactionManager(explicit=True)
-                    # tm = self.request.tm
-                    # with tm:
-                    #     dbsession = get_tm_session(self.request.config.registry['dbsession_factory'], tm)
+                    sesh = self.request.dbsession
 
                     # Data went into the table on refresh.  Obviously don't love that but whatever.
                     # Now we will have to check for duplicate entries and update template instead if it exists.
-                    simple_test = TestModel(name="Test Name", age=446, base_template="int main(foo)")
-                    self.request.dbsession.add(simple_test)
+                    # simple_test = TestModel(name="Test Name", age=446, base_template="int main(foo)")
+                    # self.request.dbsession.add(simple_test)
+
+                    # Doing a query to retrieve a specific entry
+                    q = sesh.query(TestModel)
+                    located = q.filter(TestModel.name == "Test Name").first()
+                    print(f"Located record template is: {located.base_template}")
+
+                    # Doing a query to update an entry
+                    update_me = q.filter(TestModel.name == "Test Name")
+                    update_me.update({TestModel.base_template: captured["richtext"]})
+
+                    # print(captured["richtext"])
+
                     # Must use this rather than dbsession to commit.
                     transaction.commit()
                     # self.request.dbsession.commit()
