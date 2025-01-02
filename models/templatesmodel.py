@@ -8,7 +8,7 @@ from sqlalchemy import ( # type: ignore
 
 from .meta import Base
 
-
+# Keep alive - Temp
 class TemplatesModel(Base):
     __tablename__ = 'templates'
     id = Column(Integer, primary_key=True)
