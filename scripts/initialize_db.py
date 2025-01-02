@@ -1,10 +1,12 @@
 import argparse
+from datetime import datetime
 import sys
 
 from pyramid.paster import bootstrap, setup_logging # type: ignore
 from sqlalchemy.exc import OperationalError # type: ignore
 
-from .. import models
+# from .. import models
+from ..models import MyModel, UsersModel, TemplatesModel
 
 
 def setup_models(dbsession):
@@ -12,9 +14,12 @@ def setup_models(dbsession):
     Add or update models / fixtures in the database.
 
     """
-    model = models.mymodel.MyModel(name='one', value=1)
+    model = MyModel(name='one', value=1)
     dbsession.add(model)
-    test_model = models.testmodel.TestModel(name="Test", age=44, base_template = "int main()")
+    test_user = UsersModel(user_name = "Nakor", user_pass = "FakePass", 
+                                             user_email = "null@null.com", user_join_date = datetime.now())
+    dbsession.add(test_user)
+    test_model = TemplatesModel(base_template = "int main()")
     dbsession.add(test_model)
 
 

@@ -3,17 +3,17 @@ from sqlalchemy import ( # type: ignore
     Index,
     Integer,
     Text,
+    ForeignKey,
 )
 
 from .meta import Base
 
 
-class TestModel(Base):
-    __tablename__ = 'testtable'
+class TemplatesModel(Base):
+    __tablename__ = 'templates'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    age = Column(Integer)
+    user_id = Column(Integer(), ForeignKey('users.id')) # type: ignore
     base_template = Column(Text)
 
 
-Index('test_index', TestModel.name, unique=True)
+Index('id', TemplatesModel.id, unique=True)

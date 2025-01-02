@@ -1,4 +1,4 @@
-from codingbones.models.testmodel import TestModel
+from codingbones.models.templatesmodel import TemplatesModel
 from pyramid.view import view_config # type: ignore
 from pyramid.response import Response # type: ignore
 from sqlalchemy.exc import SQLAlchemyError # type: ignore
@@ -99,10 +99,10 @@ class DeformDemo(object):
                     # self.request.dbsession.add(simple_test)
 
                     # Doing a query to retrieve a specific entry
-                    q = sesh.query(TestModel)
+                    q = sesh.query(TemplatesModel)
                     # located = q.filter(TestModel.name == "Test Name").first()
                     # print(f"Located record template is: {located.base_template}")
-                    exist_test = q.filter(TestModel.name == captured["farking"]["name"]).first()
+                    exist_test = q.filter(TemplatesModel.name == captured["farking"]["name"]).first() # Name is being removed
                     if exist_test:
                         print(f"User found:  {exist_test.name}")
                     else:
@@ -111,14 +111,14 @@ class DeformDemo(object):
                         print("User does not exist!")
 
                     # Doing a query to update an entry
-                    update_me = q.filter(TestModel.name == captured["farking"]["name"])
+                    update_me = q.filter(TemplatesModel.name == captured["farking"]["name"])
                     
                     # Whatver form was submitted all that will need to change will be the first 
                     # dictionary name (as in "farking" here).
-                    update_me.update({TestModel.base_template: captured["farking"]["template"]})
+                    update_me.update({TemplatesModel.base_template: captured["farking"]["template"]})
 
                     # Invalid entry attempt
-                    fail = q.filter(TestModel.name == "Does Not Exist").first()
+                    fail = q.filter(TemplatesModel.name == "Does Not Exist").first()
                     if fail:
                         print(f"How will it fail?  {fail.base_template}")
                     else:
