@@ -20,6 +20,8 @@ from .. import models
 import transaction # type: ignore
 from codingbones.models import get_tm_session
 
+from sqlalchemy import select # type: ignore
+
 PY3 = sys.version_info[0] == 3
 PY38MIN = sys.version_info[0] == 3 and sys.version_info[1] >= 8
 
@@ -30,26 +32,6 @@ if PY3:
 
 formatter = HtmlFormatter(nowrap=True)
 css = formatter.get_style_defs()
-
-class ExampleSchema(deform.schema.CSRFSchema):
-
-    name = colander.SchemaNode(
-        colander.String(),
-        title="Name")
-
-    age = colander.SchemaNode(
-        colander.Int(),
-        default=18,
-        title="Age",
-        description="Your age in years")
-    
-    ntemplate = colander.SchemaNode(
-        colander.String(),
-        validator=colander.Length(max=800),
-        widget=deform.widget.TextAreaWidget(rows=10, cols=60),
-        title = "Template",
-        description = "Modify template if you wish for a different structure"
-    )
 
 # def my_safe_repr(obj, context, maxlevels, level, sort_dicts=True):
 #     if type(obj) == unicode:
@@ -102,23 +84,34 @@ class DeformDemo(object):
                     q = sesh.query(TemplatesModel)
                     # located = q.filter(TestModel.name == "Test Name").first()
                     # print(f"Located record template is: {located.base_template}")
-                    exist_test = q.filter(TemplatesModel.name == captured["farking"]["name"]).first() # Name is being removed
-                    if exist_test:
-                        print(f"User found:  {exist_test.name}")
-                    else:
+                    # exist_test = q.filter(TemplatesModel.name == captured["farking"]["name"]).first() # Name is being removed
+                    # if exist_test:
+                    #     print(f"User found:  {exist_test.name}")
+                    # else:
                         # Not creating a new user here.  When an account is created the user will
                         # be added to the DB there.
-                        print("User does not exist!")
+                        # print("User does not exist!")
 
                     # Doing a query to update an entry
-                    update_me = q.filter(TemplatesModel.name == captured["farking"]["name"])
+                    # update_me = q.filter(TemplatesModel.name == captured["farking"]["name"])
                     
                     # Whatver form was submitted all that will need to change will be the first 
                     # dictionary name (as in "farking" here).
-                    update_me.update({TemplatesModel.base_template: captured["farking"]["template"]})
+                    # update_me.update({TemplatesModel.base_template: captured["farking"]["template"]})
+
+                    # Select owned by user
+                    # User ID can be cached and user objects can be selected using it
+                    template_by_owner = q.filter(TemplatesModel.user_id == 1).first()
+                    print(f"Selected: {template_by_owner.class_template}")
+
+                    # exists_criteria = (
+                    #     select(TemplatesModel.base_template).where(TemplatesModel.user_id == 1).exists()
+                    # )
+                    # stmt = select(TemplatesModel.base_template).where(exists_criteria)
+                    # print(stmt)
 
                     # Invalid entry attempt
-                    fail = q.filter(TemplatesModel.name == "Does Not Exist").first()
+                    fail = q.filter(TemplatesModel.base_template == "Does Not Exist").first()
                     if fail:
                         print(f"How will it fail?  {fail.base_template}")
                     else:

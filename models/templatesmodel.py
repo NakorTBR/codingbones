@@ -8,12 +8,15 @@ from sqlalchemy import ( # type: ignore
 
 from .meta import Base
 
-# Keep alive - Temp 3
 class TemplatesModel(Base):
     __tablename__ = 'templates'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer(), ForeignKey('users.id')) # type: ignore
-    base_template = Column(Text)
+    template_header = Column(Text)
+    base_template = Column(Text) # Main entry point
+    class_template = Column(Text)
+    method_template = Column(Text)
+
 
 
 Index('id', TemplatesModel.id, unique=True)

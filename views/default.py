@@ -52,7 +52,7 @@ def my_view(request):
 
             try:
                 appstruct = form.validate(controls)  # call validate
-            except ValidationFailure as e: # catch the exception
+            except ValidationFailure as e: # type: ignore
                 return {'form':e.render()} # re-render the form with an exception
 
             print(f"Base template is: {appstruct['base_template']}")
