@@ -2,8 +2,22 @@
     <div metal:fill-slot="content">
 
         <div class="content">
-            <h1><span class="font-semi-bold">Coding.Bones()</span> <span class="smaller">A coding quickstart tool</span></h1>
-            <p class="lead">Welcome to <span class="font-normal">${project}</span>. &nbsp;No AI, just generate a skeleton and go.</p>
+        <tal:block define="user python: request.identity if request.is_authenticated else None">
+        <tal:condition condition="not user">
+            <p class="pull-right">
+                <a tal:attributes="href string:${request.route_url('login')}">Login</a>
+            </p>
+        </tal:condition>
+        <tal:condition condition="user">
+            <form class="pull-right" tal:attributes="action string:${request.route_url('logout')}" method="post">
+                <span tal:replace="user/name" />
+                <input type="hidden" name="csrf_token" tal:attributes="value string:${get_csrf_token()}" />
+                <button class="btn btn-link" type="submit">Logout</button>
+            </form>
+        </tal:condition>
+    </tal:block>
+        <h1><span class="font-semi-bold">Coding.Bones()</span> <span class="smaller">A coding quickstart tool</span></h1>
+        <p class="lead">Welcome to <span class="font-normal">${project}</span>. &nbsp;No AI, just generate a skeleton and go.</p>
         </div>
         <div>
         ${structure:rendered_form}

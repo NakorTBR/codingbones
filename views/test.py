@@ -33,6 +33,8 @@ if PY3:
 formatter = HtmlFormatter(nowrap=True)
 css = formatter.get_style_defs()
 
+from .auth import logged_user, logged_id
+
 # def my_safe_repr(obj, context, maxlevels, level, sort_dicts=True):
 #     if type(obj) == unicode:
 #         obj = obj.encode("utf-8")
@@ -173,6 +175,24 @@ class DeformDemo(object):
         # return Response("Thanks!")
         # This class can be named whatever, but what it is named will be shown as the section title.
         # Maybe this can be disabled, I'm not sure yet.
+        user = self.request.identity
+        if user is None:
+            print("User is not logged in!")
+        else:
+            print(f"{user} is logged in.")
+
+        # Login testing.  Still no good.
+        if logged_id != -1 and logged_user != "":
+            print(f"{logged_user} is logged in with the user ID of {logged_id}")
+        else:
+            print(f"Fail: User is {logged_user} with ID of {logged_id}")
+        
+        # def is_authenticated():
+        #     if logged_id != -1 and logged_user != "":
+        #         return True
+        #     else:
+        #         return False
+
         class Farking(colander.Schema):
             name = colander.SchemaNode(
                 colander.String(), description="Content name"
