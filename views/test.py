@@ -182,7 +182,7 @@ class DeformDemo(object):
             print(f"{user} is logged in.")
 
         # Login testing.  Still no good.
-        # KA_$47
+        # KA_B73
         if logged_id != -1 and logged_user != "":
             print(f"{logged_user} is logged in with the user ID of {logged_id}")
         else:
