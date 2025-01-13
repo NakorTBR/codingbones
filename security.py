@@ -1,6 +1,6 @@
-from pyramid.authentication import AuthTktCookieHelper
-from pyramid.csrf import CookieCSRFStoragePolicy
-from pyramid.request import RequestLocalCache
+from pyramid.authentication import AuthTktCookieHelper # type: ignore
+from pyramid.csrf import CookieCSRFStoragePolicy # type: ignore
+from pyramid.request import RequestLocalCache # type: ignore
 
 from . import models
 
