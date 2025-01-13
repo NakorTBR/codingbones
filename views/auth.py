@@ -34,7 +34,11 @@ def login(request):
             logged_user = login
             global logged_id
             logged_id = user.id
+            print(f"LOGGED ID: {logged_id}")
+            print(f"\n\nReq:\n{request}\n\n")
             headers = remember(request, user.id)
+            request.response.headers.extend(headers)
+            print(f"Headers: \n{headers}")
             next_url = request.route_url('test') # TODO: Correct this to default / main page
             print(f"Logging in user... ({user.id})")
             return HTTPSeeOther(location=next_url, headers=headers)

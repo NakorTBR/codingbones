@@ -2,6 +2,7 @@
     <div metal:fill-slot="content">
 
         <div class="content">
+        <!-- <tal:block define="user python: request.identity if request.is_authenticated else None"> -->
         <tal:block define="user python: request.identity if request.is_authenticated else None">
         <tal:condition condition="not user">
             <p class="pull-right">

@@ -33,7 +33,10 @@ if PY3:
 formatter = HtmlFormatter(nowrap=True)
 css = formatter.get_style_defs()
 
-from .auth import logged_user, logged_id
+import logging
+logger = logging.getLogger(__name__)
+
+# from .auth import logged_user, logged_id
 
 # def my_safe_repr(obj, context, maxlevels, level, sort_dicts=True):
 #     if type(obj) == unicode:
@@ -70,6 +73,17 @@ class DeformDemo(object):
             try:
                 controls = self.request.POST.items()
                 captured = form.validate(controls)
+
+                logger.debug("TEST DEBUG MESSAGE")
+
+                user = self.request.identity
+                is_authenticated = False
+                if user is not None:
+                    is_authenticated = True
+                    print("User reads as authenticated in submitted POST")
+                else:
+                    print("User is not logged in in submitted POST")
+
                 if success:
                     success_message = success()  # Call the success function
                     sesh = self.request.dbsession
@@ -133,6 +147,7 @@ class DeformDemo(object):
                         "js_links": form.get_widget_resources()["js"],
                         "project": "codingbones",
                         "success_message": success_message, # Include the success message
+                        "is_authenticated": is_authenticated,
                     }
                 html = form.render(captured) # This is the line that was missing before.
             except deform.ValidationFailure as e:
@@ -168,6 +183,7 @@ class DeformDemo(object):
             "js_links": reqts["js"],
             "project": "codingbones",
             "success_message": None,
+            # "is_authenticated": True,
         }
     
     @view_config(route_name='test', renderer='codingbones:templates/test_template.pt')
@@ -175,6 +191,7 @@ class DeformDemo(object):
         # return Response("Thanks!")
         # This class can be named whatever, but what it is named will be shown as the section title.
         # Maybe this can be disabled, I'm not sure yet.
+        # print(f"Ident: {self.request}")
         user = self.request.identity
         if user is None:
             print("User is not logged in!")
@@ -182,10 +199,17 @@ class DeformDemo(object):
             print(f"{user} is logged in.")
 
         # Login testing.  Still no good.
-        if logged_id != -1 and logged_user != "":
-            print(f"{logged_user} is logged in with the user ID of {logged_id}")
+        # if logged_id != -1 and logged_user != "":
+        #     print(f"{logged_user} is logged in with the user ID of {logged_id}")
+        # else:
+        #     print(f"Fail: User is {logged_user} with ID of {logged_id}")
+
+        print(f"AUTH CHECK: {self.request.is_authenticated}")
+
+        if self.request.is_authenticated:
+            print("USER IS AUTHENTICATED FINALLY")
         else:
-            print(f"Fail: User is {logged_user} with ID of {logged_id}")
+            print("Like, what are we gonna do Scoobs?????")
         
         # def is_authenticated():
         #     if logged_id != -1 and logged_user != "":
@@ -221,10 +245,4 @@ class DeformDemo(object):
             timestamp = now.strftime("%d-%m-%Y %H:%M:%S")
             return f'Template updated @{timestamp}'
         
-        # No longer getting an exception, but the form return is NOT inline.
-        # TODO: MUST be inline return.
-        # One colour for success, and red or something for error.
-        # So it is technically inline, except that it is rewriting the entire page that is rendered.
-        # Will have to figure it out tomorrow I think.
-        # Or tomorrow lol.
         return self.render_form(form, success=succeed)

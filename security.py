@@ -4,11 +4,20 @@ from pyramid.request import RequestLocalCache # type: ignore
 
 from . import models
 
+import logging
+logger = logging.getLogger(__name__)
+
+# TEST
+# No print or logger statements are being output from this file.
+# Likely indication something is wrong af.
+import sys
+print(sys.path)
 
 class MySecurityPolicy:
     def __init__(self, secret):
         self.authtkt = AuthTktCookieHelper(secret)
         self.identity_cache = RequestLocalCache(self.load_identity)
+        logger.debug(f"-=-=-=-=-=-=-Log level: {logger.level}") 
 
     def load_identity(self, request):
         identity = self.authtkt.identify(request)
@@ -17,6 +26,9 @@ class MySecurityPolicy:
 
         userid = identity['userid']
         user = request.dbsession.query(models.UsersModel).get(userid)
+        # Update the cache
+        if user:
+            self.identity_cache.put(request, user)
         return user
 
     def identity(self, request):
